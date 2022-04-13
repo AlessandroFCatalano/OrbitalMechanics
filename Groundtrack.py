@@ -51,8 +51,6 @@ plt.figure()
 plt.rcParams['axes.grid'] = True
 plt.style.use('dark_background')
 ax = plt.axes(projection='3d') # 3D plot
-# NON ho capito
-ax = plt.axes(projection='3d')
 x = np.outer(np.cos(lons), np.cos(lats)).T
 y = np.outer(np.sin(lons), np.cos(lats)).T
 z = np.outer(np.ones(np.size(lons)), np.sin(lats)).T
@@ -62,10 +60,14 @@ ax.plot_surface(x*6371, y*6371, z*6371, rstride=4, cstride=4, facecolors = bm)
 ax.plot(xt[:,0], xt[:,1], xt[:,2],'r')
 # Rescale the plot
 ax.auto_scale_xyz([-9000, 9000], [-9000, 9000], [-9000, 9000])
+ax.set_xlabel('$r_x$ [km]')
+ax.set_ylabel('$r_y$ [km]')
+ax.set_zlabel('$r_z$ [km]')
 
 lat, lon = AT.lat_long(xt[:,:3], t)
 plt.figure()
 plt.imshow(bm, extent=[-180,180,-90,90])
 plt.plot(np.rad2deg(lon),np.rad2deg(lat),'r')
-ax.plot(sol[:,0], sol[:,1], sol[:,2],'r')
+plt.xlabel('longhitude [deg]')
+plt.ylabel('latitude [deg]')
 plt.show()
